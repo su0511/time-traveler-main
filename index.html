@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Time Traveler Homepage</title>
+  <style>
+     @font-face {
+      font-family: "Canela";
+      src: url("Canela/CanelaText-Regular-Trial.otf");
+    }
+
+    :root {
+      --bg: #f5faff;
+      --text: #154360;
+      --button-bg: #aed6f1;
+      --button-hover: #d6eaf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'canela', serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      background-color: var(--button-bg);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      background-color: var(--button-hover);
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Time Traveler Project</h1>
+  <p>Explore the web through three decades of evolving design and code.</p>
+
+  <div class="nav-links">
+    <a href="1990s/index.html">1990s</a>
+    <a href="2000s/index.html">2000s</a>
+    <a href="2010s/index.html">2010s</a>
+  </div>
+
+  <footer>
+    &copy; 2025 – Designed for Introduction to Computation
+  </footer>
+</body>
+</html>

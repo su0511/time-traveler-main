@@ -6,6 +6,7 @@
   <title>My Website is a Shifting House – Laurel Schwulst</title>
   <meta name="description" content="A poetic essay on what a website can be, inspired by Laurel Schwulst's reflections." />
   <style>
+    
     @font-face {
       font-family: "Canela";
       src: url("Canela/CanelaText-Regular-Trial.otf");
@@ -157,7 +158,6 @@
       transform: translateY(0);
     }
 
-
     .fade-section.visible, .fade-section.visible * {
       opacity: 1;
       transform: translateY(0);
@@ -179,12 +179,11 @@
     }
 
     .website-types-container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin-top: 4rem;
-  
-    }
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  margin-top: 4rem;
+}
 
     .website-types-buttons {
       flex: 1;
@@ -203,7 +202,6 @@
       text-align: left;
       border-radius: 12px;
       font-size: 1rem;
-      transition: background 0.3s;
     }
 
     .website-types-buttons button.active {
@@ -220,11 +218,14 @@
       border: 2px dashed #ccc;
       padding: 1rem;
       border-radius: 12px;
-      min-height: 15px;
       background: white;
-      resize: both;
-      overflow: auto;
+      resize: vertical; 
+      overflow-y: auto; 
+      overflow-x: hidden;
       position: relative;
+      height: 400px; 
+      width: 100%;  
+      box-sizing: border-box;
     }
 
     .reset-button {
@@ -240,6 +241,50 @@
       cursor: pointer;
       font-size: 0.9rem;
     }
+
+    @media (max-width: 768px) {
+  .website-types-container {
+    grid-template-columns: 1fr;
+  }
+
+  .website-types-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .website-types-buttons button {
+    flex: 1 1 45%;
+    text-align: center;
+  }
+
+  .website-types-content {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+
+  .back-home-button {
+  font-family: "Canela", Georgia, serif;
+  font-size: small; 
+  position: fixed;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #1b4f72;
+  color: #fff;
+  padding: 5px 12px; 
+  text-decoration: none;
+  border-radius: 8px;
+  z-index: 999;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.back-home-button:hover {
+  background-color: #333;
+}
+
   </style>
 </head>
 <body>
@@ -358,7 +403,7 @@
         
           <button id="reset-button" class="reset-button">Reset</button>
           </div>
-       
+          </div>
      <section class="fade-section" data-title="The web is what we make it">
         <h2 id="the-web-is-what-we-make-it">The web is what we make it</h2>
         <p>While an individual website could be any of those metaphors I mentioned above, I believe the common prevailing metaphor—the internet as cloud—is problematic. The internet is not one all-encompassing, mysterious, and untouchable thing. (In <a href="https://noahveltman.com/internet-shape/" target="_blank">early patent drawings depicting the internet</a>, it appears as related shapes: a blob, brain, or explosion.) These metaphors obfuscate the reality that the internet is made up of individual nodes: individual computers talking to other individual computers.</p>
@@ -381,6 +426,8 @@
 
     <a href="https://www.are.na/the-creative-independent-1522276020/sparrows-talking-about-the-future-of-the-web" target="_blank" class="fancy-button">29 Blocks on Are.na</a>
   </main>
+  <a href="/index.html" class="back-home-button">← Back to Homepage</a>
+
 
   <script>
     window.addEventListener('load', () => {
@@ -389,9 +436,6 @@
   }
   window.scrollTo(0, 0);
 });
-
-
-
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -447,6 +491,18 @@
     box.scrollTop = 0;
     setTimeout(() => box.style.transition = '', 500);
   });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    const offset = 80; 
+    const bodyTop = document.body.getBoundingClientRect().top;
+    const elementTop = target.getBoundingClientRect().top;
+    const scrollTo = elementTop - bodyTop - offset;
+    window.scrollTo({ top: scrollTo, behavior: "smooth" });
+  });
+});
   </script>
 </body>
 </html>

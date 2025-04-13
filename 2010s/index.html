@@ -6,11 +6,13 @@
   <title>My Website is a Shifting House – Laurel Schwulst</title>
   <meta name="description" content="A poetic essay on what a website can be, inspired by Laurel Schwulst's reflections." />
   <style>
+
     
-    @font-face {
-    font-family: "Canela";
-    src: url("/time-traveler-main/Canela/CanelaText-Regular-Trial.otf");
-  }
+   @font-face {
+  font-family: "Canela";
+  src: url("../Canela/CanelaText-Regular-Trial.otf");
+}
+
 
 
     * {
@@ -436,6 +438,9 @@
   window.scrollTo(0, 0);
 });
 
+let buttons = document.querySelectorAll('.website-types-buttons button');
+
+
   let observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -459,17 +464,6 @@
   document.getElementById('lightbox').addEventListener('click', () => {
     document.getElementById('lightbox').style.display = 'none';
   });
-
-  let buttons = document.querySelectorAll('.website-types-buttons button');
-  let contentBox = document.getElementById('website-types-content');
-  let contentMap = {
-  m: 'A website can feel like a room — finite, intentional, rearrangeable.',
-    shelf: 'A website might be a shelf — home to small objects, easy to rearrange.',
-    plant: 'A website can grow like a plant — slowly, patiently, over time.',
-    garden: 'A website as garden — seasonal, meditative, sometimes quiet.',
-    puddle: 'A website as puddle — short-lived, reflective, storm-born.',
-    rock: 'A website might be a rock — one-time, thrown into the ocean without regret.'
-  };
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {

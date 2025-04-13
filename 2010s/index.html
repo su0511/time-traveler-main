@@ -437,7 +437,7 @@
   window.scrollTo(0, 0);
 });
 
-  const observer = new IntersectionObserver(entries => {
+  let observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -451,7 +451,7 @@
 
   document.querySelectorAll('img').forEach(img => {
     img.addEventListener('click', () => {
-      const lightbox = document.getElementById('lightbox');
+      let lightbox = document.getElementById('lightbox');
       lightbox.style.display = 'flex';
       lightbox.querySelector('img').src = img.src;
     });
@@ -460,11 +460,11 @@
   document.getElementById('lightbox').addEventListener('click', () => {
     document.getElementById('lightbox').style.display = 'none';
   });
-
-  const buttons = document.querySelectorAll('.website-types-buttons button');
-  const contentBox = document.getElementById('website-types-content');
-  const contentMap = {
-    room: 'A website can feel like a room — finite, intentional, rearrangeable.',
+let
+  let buttons = document.querySelectorAll('.website-types-buttons button');
+  let contentBox = document.getElementById('website-types-content');
+  let contentMap = {
+  m: 'A website can feel like a room — finite, intentional, rearrangeable.',
     shelf: 'A website might be a shelf — home to small objects, easy to rearrange.',
     plant: 'A website can grow like a plant — slowly, patiently, over time.',
     garden: 'A website as garden — seasonal, meditative, sometimes quiet.',
@@ -476,15 +476,15 @@
     btn.addEventListener('click', () => {
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const key = btn.getAttribute('data-content');
+      let key = btn.getAttribute('data-content');
       document.querySelectorAll('.type-content').forEach(div => div.style.display = 'none');
       document.getElementById(`content-${key}`).style.display = 'block';
     });
   });
 
-  const resetButton = document.getElementById('reset-button');
+  let resetButton = document.getElementById('reset-button');
   resetButton.addEventListener('click', () => {
-    const box = document.getElementById('website-types-content');
+    let box = document.getElementById('website-types-content');
     box.style.transition = 'all 0.5s ease';
     box.style.width = '100%';
     box.style.height = 'auto';
@@ -495,11 +495,11 @@
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    const offset = 80; 
-    const bodyTop = document.body.getBoundingClientRect().top;
-    const elementTop = target.getBoundingClientRect().top;
-    const scrollTo = elementTop - bodyTop - offset;
+    let target = document.querySelector(this.getAttribute('href'));
+    let offset = 80; 
+    let bodyTop = document.body.getBoundingClientRect().top;
+    let elementTop = target.getBoundingClientRect().top;
+    let scrollTo = elementTop - bodyTop - offset;
     window.scrollTo({ top: scrollTo, behavior: "smooth" });
   });
 });

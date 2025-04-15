@@ -432,70 +432,50 @@
 
   <script>
     window.addEventListener('load', () => {
-  if (window.location.hash) {
-    history.replaceState(null, '', window.location.pathname);
-  }
-  window.scrollTo(0, 0);
-});
-
-let buttons = document.querySelectorAll('.website-types-buttons button');
-
-
-  let observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+      if (window.location.hash) history.replaceState(null, '', window.location.pathname);
+      window.scrollTo(0, 0); //https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
+  
+      const observer = new IntersectionObserver(entries => { //https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+  
+      document.querySelectorAll('.fade-section, .intro').forEach(el => observer.observe(el));
+  
+      const lightbox = document.getElementById('lightbox');
+      document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('click', () => {
+          lightbox.style.display = 'flex';
+          lightbox.querySelector('img').src = img.src;
+        });
+      });
+      lightbox.addEventListener('click', () => lightbox.style.display = 'none');
+  
+      const buttons = document.querySelectorAll('.website-types-buttons button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => { //https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const key = btn.dataset.content;
+          document.querySelectorAll('.type-content').forEach(div => div.style.display = 'none');
+          document.getElementById(`content-${key}`).style.display = 'block';
+        });
+      });
+  
+      document.getElementById('reset-button')?.addEventListener('click', () => {
+        const box = document.getElementById('website-types-content');
+        box.style.transition = 'all 0.5s ease';
+        box.style.width = '100%';
+        box.style.height = 'auto';
+        box.scrollTop = 0;
+        setTimeout(() => box.style.transition = '', 500); //https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout
+      });
     });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.fade-section').forEach(section => observer.observe(section));
-  observer.observe(document.querySelector('.intro'));
-
-  document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('click', () => {
-      let lightbox = document.getElementById('lightbox');
-      lightbox.style.display = 'flex';
-      lightbox.querySelector('img').src = img.src;
-    });
-  });
-
-  document.getElementById('lightbox').addEventListener('click', () => {
-    document.getElementById('lightbox').style.display = 'none';
-  });
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      let key = btn.getAttribute('data-content');
-      document.querySelectorAll('.type-content').forEach(div => div.style.display = 'none');
-      document.getElementById(`content-${key}`).style.display = 'block';
-    });
-  });
-
-  let resetButton = document.getElementById('reset-button');
-  resetButton.addEventListener('click', () => {
-    let box = document.getElementById('website-types-content');
-    box.style.transition = 'all 0.5s ease';
-    box.style.width = '100%';
-    box.style.height = 'auto';
-    box.scrollTop = 0;
-    setTimeout(() => box.style.transition = '', 500);
-  });
-
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    let target = document.querySelector(this.getAttribute('href'));
-    let offset = 80; 
-    let bodyTop = document.body.getBoundingClientRect().top;
-    let elementTop = target.getBoundingClientRect().top;
-    let scrollTo = elementTop - bodyTop - offset;
-    window.scrollTo({ top: scrollTo, behavior: "smooth" });
-  });
-});
   </script>
+  
 </body>
 </html>
